@@ -1,4 +1,4 @@
-// Sayu Restaurant — site behaviour
+// Sayu Restaurant, site behaviour
 (function () {
   "use strict";
 
@@ -100,14 +100,14 @@
   }
 
   /* ------------------------------------------------------------------
-   * Live open/closed status widget — Sydney time, viewer-location-proof
+   * Live open/closed status widget, Sydney time, viewer-location-proof
    * ------------------------------------------------------------------ */
   // day index: 0 = Sunday ... 6 = Saturday, matching Date#getDay() on the
   // Sydney-local date we derive below. Each entry is a list of [open, close]
   // pairs in 24h minutes-since-midnight form.
   var HOURS = {
-    0: [], // Sunday — closed
-    1: [], // Monday — closed
+    0: [], // Sunday, closed
+    1: [], // Monday, closed
     2: [[17 * 60, 22 * 60]], // Tuesday 5pm-10pm
     3: [[17 * 60, 22 * 60]], // Wednesday 5pm-10pm
     4: [[11 * 60 + 30, 14 * 60], [17 * 60, 22 * 60]], // Thursday
@@ -175,7 +175,7 @@
       }
     }
 
-    // Not currently open — find the next opening today (a later range,
+    // Not currently open. Find the next opening today (a later range,
     // e.g. the gap between lunch and dinner) or roll to the next open day.
     for (var j = 0; j < todays.length; j++) {
       if (now.minutes < todays[j][0]) {
@@ -231,10 +231,15 @@
     var items = document.querySelectorAll(".reveal");
     if (!items.length) return;
 
+    // Content is visible by default in the HTML/CSS with no JS at all.
+    // Only once we get here do we opt elements into the hidden starting
+    // state and animate them in, so a JS error anywhere else on the page
+    // can never leave this content permanently invisible.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
-      items.forEach(function (el) { el.classList.add("is-visible"); });
       return;
     }
+
+    items.forEach(function (el) { el.classList.add("reveal-armed"); });
 
     var observer = new IntersectionObserver(
       function (entries) {
@@ -252,7 +257,7 @@
   }
 
   /* ------------------------------------------------------------------
-   * Gallery lightbox — keyboard accessible, focus-trapped
+   * Gallery lightbox, keyboard accessible, focus-trapped
    * ------------------------------------------------------------------ */
   function initLightbox() {
     var lightbox = document.querySelector("[data-lightbox]");
@@ -326,11 +331,21 @@
     });
   }
 
+  function safeInit(name, fn) {
+    try {
+      fn();
+    } catch (err) {
+      // One feature failing (e.g. an unsupported API) should never take
+      // the rest of the page's interactivity down with it.
+      console.error("Sayu site: " + name + " failed to initialise", err);
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
-    initMobileNav();
-    initSmoothScroll();
-    initStatusWidget();
-    initReveal();
-    initLightbox();
+    safeInit("mobile nav", initMobileNav);
+    safeInit("smooth scroll", initSmoothScroll);
+    safeInit("status widget", initStatusWidget);
+    safeInit("scroll reveal", initReveal);
+    safeInit("lightbox", initLightbox);
   });
 })();
