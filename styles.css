@@ -520,6 +520,9 @@ body.nav-open { overflow: hidden; }
 
 .section-footer-link {
   margin-top: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 /* ==========================================================================
@@ -930,6 +933,8 @@ body.nav-open { overflow: hidden; }
   border-bottom: 1px solid rgba(140, 122, 94, 0.25);
 }
 .page-hero .eyebrow { margin-bottom: 1rem; }
+.menu-download svg { width: 18px; height: 18px; }
+.menu-download { margin-bottom: 1.5rem; }
 
 /* Utility */
 .visually-hidden {
