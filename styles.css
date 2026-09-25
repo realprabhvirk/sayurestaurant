@@ -92,7 +92,7 @@ button { font-family: inherit; cursor: pointer; }
 /* Keep anchor-linked sections clear of the sticky header when jumped to
    directly (nav links, menu/gallery teasers, footer, browser back/forward). */
 #home, #trust, #menu-teaser, #gallery-teaser, #location, #featured,
-#share, #sushi-rolls, #signature-dishes, #grill, #sides, #sweet, #sauces, #drinks {
+#share, #sushi-rolls, #signature-dishes, #grill, #sides, #sweet, #sauces {
   scroll-margin-top: 90px;
 }
 .section--sakura { background: var(--color-sakura); }
