@@ -91,8 +91,8 @@ button { font-family: inherit; cursor: pointer; }
 }
 /* Keep anchor-linked sections clear of the sticky header when jumped to
    directly (nav links, menu/gallery teasers, footer, browser back/forward). */
-#home, #trust, #menu-teaser, #gallery-teaser, #location,
-#sushi-sashimi, #robata-grill, #izakaya-small-plates, #sides, #drinks {
+#home, #trust, #menu-teaser, #gallery-teaser, #location, #featured,
+#share, #sushi-rolls, #signature-dishes, #grill, #sides, #sweet, #sauces, #drinks {
   scroll-margin-top: 90px;
 }
 .section--sakura { background: var(--color-sakura); }
@@ -693,6 +693,105 @@ body.nav-open { overflow: hidden; }
   font-size: 0.95rem;
 }
 .menu-placeholder strong { color: var(--color-sumi); display: block; margin-bottom: 0.4rem; font-weight: 500; }
+
+.menu-notes {
+  margin-top: 2rem;
+  padding: 1.5rem 1.75rem;
+  background: var(--color-sakura);
+  border-radius: var(--radius);
+  max-width: 640px;
+}
+.menu-notes p { margin-bottom: 0.75rem; font-size: 0.92rem; color: var(--color-sumi-soft); }
+.menu-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+}
+.menu-legend strong { font-weight: 600; }
+.menu-surcharge {
+  font-size: 0.8rem;
+  color: var(--color-hanko);
+  margin-bottom: 0 !important;
+}
+
+.featured-grid {
+  display: grid;
+  gap: 1.75rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 700px) {
+  .featured-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1000px) {
+  .featured-grid { grid-template-columns: repeat(4, 1fr); }
+}
+.featured-dish {
+  margin: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--color-washi-dim);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.featured-dish:hover { transform: translateY(-4px); box-shadow: 0 18px 30px -20px rgba(0,0,0,0.3); }
+.featured-dish img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.featured-dish figcaption {
+  padding: 0.9rem 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.featured-dish-name { font-weight: 500; font-size: 0.95rem; }
+.featured-dish-desc { font-size: 0.8rem; color: var(--color-sumi-soft); }
+.featured-dish-price { font-size: 0.85rem; color: var(--color-hanko); font-weight: 500; margin-top: 0.2rem; }
+.featured-photo-note {
+  margin-top: 2rem;
+  font-size: 0.78rem;
+  color: var(--color-sumi-soft);
+  max-width: 60ch;
+}
+
+.menu-items {
+  display: flex;
+  flex-direction: column;
+}
+.menu-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 1.5rem;
+  row-gap: 0.15rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgba(140, 122, 94, 0.2);
+}
+.menu-item:last-child { border-bottom: none; }
+.menu-item-name {
+  font-weight: 500;
+  grid-column: 1;
+}
+.menu-item-tags {
+  font-weight: 400;
+  font-size: 0.78rem;
+  color: var(--color-bronze);
+}
+.menu-item-desc {
+  grid-column: 1;
+  font-size: 0.88rem;
+  color: var(--color-sumi-soft);
+}
+.menu-item-desc:empty { display: none; }
+.menu-item-price {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  font-weight: 500;
+  color: var(--color-hanko);
+  white-space: nowrap;
+}
 
 /* ==========================================================================
    Gallery page
